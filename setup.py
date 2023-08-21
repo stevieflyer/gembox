@@ -8,7 +8,7 @@ setup(
     ],
     url='https://github.com/stevieflyer/gembox',
     author='Steve Flyer',
-    author_email='steveflyer7@gmail.com',  # 替换为你的邮箱
+    author_email='steveflyer7@gmail.com',
     description='This is the gembox toolbox for steve flyer. You can also find your hammers here.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
