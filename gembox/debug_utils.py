@@ -44,9 +44,13 @@ class Debugger:
         """
         self._name = name if name is not None else f"{__name__}_{uuid.uuid4().hex[:4]}_logger"
         self._logger = logging.getLogger(self._name)
-        # basic configuration
+        # Clear existing handlers
+        self._logger.handlers = []
+        # Basic configuration
         logging.basicConfig(format=DEFAULT_LOG_FORMAT)
         self._logger.setLevel(level)
+        # Prevent log propagation to higher-level loggers
+        self._logger.propagate = False
 
     @property
     def name(self):
