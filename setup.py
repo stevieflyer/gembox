@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='gembox',
-    version='0.1.2',
+    version='0.1.4',
     packages=find_packages(),
     install_requires=[
     ],
@@ -12,5 +12,4 @@ setup(
     description='This is the gembox toolbox for steve flyer. You can also find your hammers here.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-
 )
