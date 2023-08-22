@@ -1,5 +1,6 @@
 import asyncio
 import multiprocessing
+
 from typing import List
 
 from gembox.multiprocess.mp_async import Task
@@ -24,8 +25,6 @@ class ParallelExecutor:
     async def run(cls, tasks: List[Task], n_workers: int = 1):
         # 使用 TaskSplitter 按权重均匀地划分任务
         split_tasks = TaskSplitter.split_evenly_by_weight(tasks, n_workers)
-
-        print(f"split tasks: {split_tasks}")
 
         with multiprocessing.Pool(n_workers) as pool:
             # 使用 map 方法来启动多个进程
