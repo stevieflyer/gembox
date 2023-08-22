@@ -1,11 +1,11 @@
 from typing import List
 
-from .async_task import AsyncTask
+from .task import Task
 
 
 class TaskSplitter:
     @staticmethod
-    def split_by_max(tasks: List[AsyncTask], max_weight_per_partition: int) -> List[List[AsyncTask]]:
+    def split_by_max(tasks: List[Task], max_weight_per_partition: int) -> List[List[Task]]:
         """
         Partition the given tasks into groups based on a maximum weight constraint.
 
@@ -37,7 +37,7 @@ class TaskSplitter:
         return partitions
 
     @staticmethod
-    def split_evenly_by_weight(tasks: List[AsyncTask], n_split: int) -> List[List[AsyncTask]]:
+    def split_evenly_by_weight(tasks: List[Task], n_split: int) -> List[List[Task]]:
         """
         Partition the tasks into a specified number of groups based on their weights, distributing weights as evenly as possible.
 
@@ -62,7 +62,7 @@ class TaskSplitter:
         return partitions
 
     @staticmethod
-    def split_evenly_by_count(tasks: List[AsyncTask], num_partitions: int) -> List[List[AsyncTask]]:
+    def split_evenly_by_count(tasks: List[Task], num_partitions: int) -> List[List[Task]]:
         """
         Partition the tasks into a specified number of groups, distributing tasks as evenly as possible.
 

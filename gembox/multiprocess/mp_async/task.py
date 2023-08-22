@@ -1,20 +1,22 @@
+import asyncio
 import inspect
 from typing import Callable, Any, Dict
 
 
-class AsyncTask:
+class Task:
     """
-    A wrapper for a task to be executed asynchronously.
+    A wrapper for a task to be executed asynchronously or synchronously.
 
     :param task: (Callable) the task to be executed
     :param params: (Dict) the parameters to be passed to the task
     """
 
-    def __init__(self, task: Callable[[Any], Any], params: Dict, weight_func = None):
+    def __init__(self, task: Callable[[Any], Any], params: Dict, weight_func=None):
         self.validate_params(task, params)
         self.task = task
         self.params = params
         self.weight = 1 if weight_func is None else weight_func(params)
+        self.is_async = asyncio.iscoroutinefunction(task)
 
     @staticmethod
     def validate_params(task: Callable, params: Dict) -> None:
@@ -37,13 +39,20 @@ class AsyncTask:
         #     raise ValueError(f"Invalid parameters provided: {', '.join(extra_params)}")
 
     async def run(self):
-        return await self.task(**self.params)
+        # 判断task是否为异步函数
+        if self.is_async:
+            return await self.task(**self.params)
+        else:
+            return self.task(**self.params)
 
     def __str__(self):
-        return f"AsyncTask(task={self.task.__name__}, params={self.params})"
+        if self.is_async:
+            return f"Task<Async>(task={self.task.__name__}, params={self.params})"
+        else:
+            return f"Task(task={self.task.__name__}, params={self.params})"
 
     def __repr__(self):
         return self.__str__()
 
 
-__all__ = ["AsyncTask"]
+__all__ = ["Task"]
