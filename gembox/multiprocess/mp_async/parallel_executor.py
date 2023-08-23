@@ -9,14 +9,33 @@ from gembox.multiprocess.mp_async.task_spliter import TaskSplitter
 
 class ParallelExecutor:
 
+    # @staticmethod
+    # def _worker_tasks(tasks: List[Task]):
+    #     # 新建一个事件循环来运行异步任务
+    #     loop = asyncio.new_event_loop()
+    #     asyncio.set_event_loop(loop)
+    #
+    #     # 在这个事件循环上运行所有的任务并收集结果
+    #     results = loop.run_until_complete(asyncio.gather(*(task.run() for task in tasks)))
+    #     loop.close()
+    #
+    #     return results
+
     @staticmethod
     def _worker_tasks(tasks: List[Task]):
         # 新建一个事件循环来运行异步任务
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
 
+        async def sequential_execution(tasks: List[Task]):
+            results = []
+            for task in tasks:
+                result = await task.run()
+                results.append(result)
+            return results
+
         # 在这个事件循环上运行所有的任务并收集结果
-        results = loop.run_until_complete(asyncio.gather(*(task.run() for task in tasks)))
+        results = loop.run_until_complete(sequential_execution(tasks))
         loop.close()
 
         return results
