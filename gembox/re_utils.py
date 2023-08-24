@@ -1,6 +1,6 @@
 import re
 
-sep_num_regexp = r"(\d{1,3}(?:,\d{3})*"
+sep_num_regexp = r"(\d{1,3}(?:,\d{3})*\d*)"
 float_num_regexp = r"(\d{1,3}(?:,\d{3})*\.\d+)"
 
 
