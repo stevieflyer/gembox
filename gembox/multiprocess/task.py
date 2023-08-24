@@ -1,5 +1,4 @@
 import asyncio
-import inspect
 from typing import Callable, Any, Dict
 
 
@@ -30,13 +29,7 @@ class Task:
         :param params: (Dict) the parameters to be passed to the task
         :return: None
         """
-        sig = inspect.signature(task)
-        valid_params = set(sig.parameters.keys())
-        provided_params = set(params.keys())
-
-        # if not provided_params.issubset(valid_params):
-        #     extra_params = provided_params - valid_params
-        #     raise ValueError(f"Invalid parameters provided: {', '.join(extra_params)}")
+        return
 
     async def run(self):
         # 判断task是否为异步函数
