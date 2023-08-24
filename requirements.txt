@@ -1,0 +1,3 @@
+pandas~=1.5.3
+gembox~=0.1.7
+setuptools~=67.8.0
