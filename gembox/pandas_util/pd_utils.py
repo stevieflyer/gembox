@@ -1,6 +1,9 @@
 import pathlib
+from typing import Collection
+
 import pandas as pd
 
+from gembox.io.pandas_io import PandasIO
 from gembox.io import ensure_pathlib_path
 
 
@@ -31,7 +34,7 @@ def merge_df(parent_dir: (str, pathlib.Path), file_regexp: str = None, on: (list
     # 2. Merge all files
     df_list = []
     for file in file_list:
-        df = pd.read_csv(file)
+        df = PandasIO.read(filepath=file)
         df_list.append(df)
 
     merged_df = pd.concat(df_list, axis=0, ignore_index=True)
@@ -41,3 +44,21 @@ def merge_df(parent_dir: (str, pathlib.Path), file_regexp: str = None, on: (list
         merged_df.drop_duplicates(subset=on, keep='first', inplace=True)
 
     return merged_df
+
+
+def drop_finished(tasks: pd.DataFrame, finished: pd.DataFrame, on: Collection[str]) -> pd.DataFrame:
+    """
+    Drop the finished tasks from the tasks dataframe.
+
+    :param tasks: (pd.DataFrame) The tasks dataframe.
+    :param finished: (pd.DataFrame) The finished tasks dataframe.
+    :param on: (Collection[str]) The column names to drop duplicates on.
+    :return: (pd.DataFrame) The remaining tasks dataframe.
+    """
+    finished_filtered = finished[on]
+    mask = tasks[on].apply(tuple, axis=1).isin(finished_filtered.apply(tuple, axis=1))
+    return tasks[~mask]
+
+
+__all__ = ["merge_df", "drop_finished"]
+
