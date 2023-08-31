@@ -1,7 +1,7 @@
 import re
 
 sep_num_regexp = r"(\d{1,3}(?:,\d{3})*\d*)"
-float_num_regexp = r"(\d{1,3}(?:,\d{3})*\.\d+)"
+float_num_regexp = r"(\d+(\.\d+)?)"
 
 
 def search_comma_sep_num(text: str):
@@ -18,6 +18,21 @@ def search_comma_sep_num(text: str):
         return num
     except Exception:
         raise ValueError(f"Cannot find a comma separated number in the string: {text}")
+
+
+def search_integer_num(text: str):
+    """
+    Search for an integer number in a string.
+
+    :param text: (str) the string to search
+    :return: (int) the number
+    """
+    try:
+        num_str = re.search(r"(\d+)", text).group(1)
+        num = int(num_str)
+        return num
+    except Exception:
+        raise ValueError(f"Cannot find an integer number in the string: {text}")
 
 
 def search_float_num(text: str):

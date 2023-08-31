@@ -14,8 +14,8 @@ def debug_decorator(action):
     return wrapper
 
 
-def get_file_handler(filepath, fmt=DEFAULT_LOG_FORMAT) -> logging.FileHandler:
-    file_handler = logging.FileHandler(filename=filepath)
+def get_file_handler(filepath, fmt=DEFAULT_LOG_FORMAT, encoding: str = 'utf-8') -> logging.FileHandler:
+    file_handler = logging.FileHandler(filename=filepath, encoding=encoding)
     formatter = logging.Formatter(fmt)
     file_handler.setFormatter(formatter)
     return file_handler

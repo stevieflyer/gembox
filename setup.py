@@ -1,8 +1,7 @@
 from setuptools import setup, find_packages
-
 setup(
     name='gembox',
-    version='0.1.11.2',
+    version='0.1.11.7',
     packages=find_packages(),
     install_requires=[
     ],

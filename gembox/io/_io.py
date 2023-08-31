@@ -3,21 +3,19 @@ import pathlib
 from typing import List, Union
 
 
-def ensure_pathlib_path(path):
+def ensure_pathlib_path(path: Union[pathlib.Path, str]) -> pathlib.Path:
     """
     Ensure the path is a pathlib.Path object
 
     :param path: (str or pathlib.Path) the path
     :return: (pathlib.Path) the path
     """
-    if path is None:
-        return None
     if not isinstance(path, pathlib.Path):
         path = pathlib.Path(path)
     return path
 
 
-def check_and_make_dir(dir_path):
+def check_and_make_dir(dir_path: Union[str, pathlib.Path]) -> pathlib.Path:
     """
     Check if the directory exists, if not, create it
 
