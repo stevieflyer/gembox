@@ -13,7 +13,6 @@ class ParallelExecutor:
         # 新建一个事件循环来运行异步任务
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-
         async def sequential_execution(_tasks: List[Task]):
             _results = []
             for task in _tasks:
