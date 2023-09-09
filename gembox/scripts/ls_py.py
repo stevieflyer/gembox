@@ -19,6 +19,7 @@ def is_hidden_dir(d: Union[str, pathlib.Path]) -> bool:
 def list_directory(d: Union[str, pathlib.Path],
                    indent_level: int = 0,
                    expand_hidden_dir: bool = False,
+                   recursive: bool = False,
                    excluded_list: Optional[list[str]] = None) -> str:
     """
     Print all items under the directory `d`.
@@ -26,6 +27,7 @@ def list_directory(d: Union[str, pathlib.Path],
     :param d: (str | pathlib.Path) the directory
     :param indent_level: (int) the indent level
     :param expand_hidden_dir: (bool) whether to expand hidden directories, i.e. directories starting with '__' or '.'
+    :param recursive: (bool) whether to list recursively
     :param excluded_list: (list[str]) a list of excluded items
     :return: (str) the string representation of the items under the directory
     """
@@ -47,8 +49,8 @@ def list_directory(d: Union[str, pathlib.Path],
                 continue
             ret += f"{'    ' * indent_level}- {child_path.name}/\n"
             # recursive for 非隐藏文件夹
-            if not is_hidden_dir(child_path) or (expand_hidden_dir and is_hidden_dir(child_path)):
-                ret += list_directory(child_path, indent_level + 1, expand_hidden_dir=expand_hidden_dir, excluded_list=excluded_list)
+            if recursive and (not is_hidden_dir(child_path) or (expand_hidden_dir and is_hidden_dir(child_path))):
+                ret += list_directory(child_path, indent_level + 1, expand_hidden_dir=expand_hidden_dir, excluded_list=excluded_list, recursive=recursive)
         else:
             ret += f"{'    ' * indent_level}- {child_path.name}\n"
     return ret
@@ -62,6 +64,7 @@ def main():
                         help='Whether to expand hidden directories, i.e. directories starting with "__" or "."')
     parser.add_argument('-x', '--exclude', nargs='*', default=None,
                         help='List of directory or file names to exclude from the output.')
+    parser.add_argument('-r', '--recursive', action='store_true', default=False, help='Whether to list recursively.')
     args = parser.parse_args()
 
-    print(list_directory(args.path, expand_hidden_dir=args.expand_hidden, excluded_list=args.exclude))
+    print(list_directory(args.path, expand_hidden_dir=args.expand_hidden, excluded_list=args.exclude, recursive=args.recursive))
