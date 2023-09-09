@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name='gembox',
-    version='0.1.12.1',
+    version='0.1.12.2',
     packages=find_packages(),
     install_requires=[
     ],
@@ -9,7 +9,7 @@ setup(
     author='Steve Flyer',
     author_email='steveflyer7@gmail.com',
     description='This is the gembox toolbox for steve flyer. You can also find your hammers here.',
-    long_description=open('README.md').read(),
+    long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     entry_points={
         'console_scripts': [

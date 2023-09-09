@@ -21,7 +21,6 @@ Gembox encapsulates a plethora of utilities streamlined for daily use, including
   - **text_reader**: 📖 Efficient reading capabilities across multiple formats.
   - **_io**: Core I/O functionalities.
 
-### Multiprocessing Utilities
 ### Multiprocessing Utilities 🚀
 
 Gembox's multiprocessing utilities are tailored for efficient, parallel execution of both synchronous and asynchronous tasks. Leveraging the power of Python's multiprocessing and asyncio modules, it provides a seamless way to distribute and execute tasks across multiple CPU cores.
