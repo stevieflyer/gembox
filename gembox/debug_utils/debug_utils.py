@@ -42,7 +42,7 @@ class Debugger:
         :param name: (Optional) name of the logger, providing it when you want to attach to a shared logger.
         :param level: (Optional) minimum logging level
         """
-        self._name = name if name is not None else f"{__name__}_{uuid.uuid4().hex[:4]}_logger"
+        self._name = name if name is not None else f"{uuid.uuid4().hex[:4]}_logger"
         self._logger = logging.getLogger(self._name)
         # Clear existing handlers
         self._logger.handlers = []

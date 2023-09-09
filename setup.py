@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name='gembox',
-    version='0.1.11.7',
+    version='0.1.12',
     packages=find_packages(),
     install_requires=[
     ],
@@ -11,4 +11,13 @@ setup(
     description='This is the gembox toolbox for steve flyer. You can also find your hammers here.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
+    entry_points={
+        'console_scripts': [
+            'ls-py=gembox.scripts.ls_py:main'
+        ]
+    },
 )
+# To build
+# python setup.py sdist bdist_wheel
+# To upload
+# twine upload dist/*

@@ -2,3 +2,5 @@ pandas~=1.5.3
 gembox~=0.1.7
 setuptools~=67.8.0
 openai~=0.27.8
+pathlib~=1.0.1
+pypdf2~=3.0.1
