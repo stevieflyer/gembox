@@ -1,3 +1,4 @@
+import abc
 import uuid
 import logging
 
@@ -126,4 +127,11 @@ class FileConsoleDebugger(Debugger):
         return self._filepath
 
 
-__all__ = ["Debugger", "FileDebugger", "ConsoleDebugger", "FileConsoleDebugger"]
+class WithDebugger(abc.ABC):
+    @property
+    @abc.abstractmethod
+    def debugger(self) -> Debugger:
+        pass
+
+
+__all__ = ["Debugger", "FileDebugger", "ConsoleDebugger", "FileConsoleDebugger", "WithDebugger"]

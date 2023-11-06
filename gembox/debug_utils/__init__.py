@@ -3,6 +3,7 @@ from .debug_utils import (
     FileDebugger,
     ConsoleDebugger,
     FileConsoleDebugger,
+    WithDebugger
 )
 '''
 class Debugger:

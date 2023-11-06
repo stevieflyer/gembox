@@ -6,7 +6,6 @@ import PyPDF2
 from docx import Document
 
 from gembox.io._io import ensure_pathlib_path
-from gembox.win_utils import convert_doc_to_docx
 
 
 class TextReader:
@@ -44,10 +43,6 @@ class TextReader:
         try:
             if suffix == ".pdf":
                 return cls._read_pdf(filepath, max_words)
-            elif suffix == ".docx":
-                return cls._read_docx(filepath, max_words)
-            elif suffix == ".doc":
-                return cls.read_doc(convert_doc_to_docx(filepath), max_words)
             else:
                 return cls.read_txt(filepath, max_words)
         except Exception as e:
@@ -81,11 +76,6 @@ class TextReader:
                 return " ".join(words)
 
         return "\n".join(full_text)
-
-    @classmethod
-    def read_doc(cls, filepath: pathlib.Path, max_words: Optional[int] = None) -> str:
-        converted_path = convert_doc_to_docx(filepath)
-        return cls._read_docx(converted_path, max_words)
 
     @classmethod
     def read_txt(cls, filepath: pathlib.Path, max_words: Optional[int] = None) -> str:

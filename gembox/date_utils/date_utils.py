@@ -39,3 +39,6 @@ def split_date_evenly(start: datetime.date, end: datetime.date, n_periods: int) 
             days=1)  # Start the next period the day after the previous one ends
 
     return result
+
+
+__all__ = ["split_date_evenly"]
